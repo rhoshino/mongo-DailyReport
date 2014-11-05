@@ -1,15 +1,29 @@
 #coding:utf-8
 
 class ReportsController < ApplicationController
-    def index
-    #@reports = current_user.reports
-@reports =  Report.all# Scaffold Code
+  def index
+    @reports = current_user.reports
+    #@reports =  Report.all# Scaffold Code
     respond_to do |format|
 
       format.html # index.html.erb
       format.json { render json: @reports }
     end
   end
+
+  def admin_report_list
+    @reports =  Report.all
+    respond_to do |format|
+
+      format.html # index.html.erb
+      format.json { render json: @reports }
+    end
+  end
+
+  def month_list
+    #TODO: add month Fillter and public Fillter
+  end
+
 
  def new
     @report = Report.new()
@@ -21,8 +35,8 @@ class ReportsController < ApplicationController
   end
 
   def create
-@report = Report.new(params[:report])#Scaffold code
-    #@report = current_user.reports.new(params[:report])
+    #@report = Report.new(params[:report])#Scaffold code
+    @report = current_user.reports.new(params[:report])
     respond_to do |format|
       if @report.save
 
@@ -61,4 +75,22 @@ class ReportsController < ApplicationController
   def edit
     @report = Report.find(params[:id])
   end
+
+    def update
+    @report = Report.find(params[:id])
+
+    respond_to do |format|
+      if @report.update_attributes(params[:report])
+        #ApplicationController.helpers.sending_report_submit(@report.user,@report)
+
+        format.html { redirect_to @report, notice: 'Report was successfully updated.' }
+        format.json { head :no_content }
+      else
+        format.html { render action: "edit" }
+        format.json { render json: @report.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
 end
+

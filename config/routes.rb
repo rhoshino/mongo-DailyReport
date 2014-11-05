@@ -5,6 +5,8 @@ MongoReport::Application.routes.draw do
 
   resources :reports
   root :to => "reports#index"
+
+  match '/all_report', to: 'reports#admin_report_list'
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

@@ -1,6 +1,9 @@
 #coding:utf-8
 <p id="notice"><%= notice %></p>
-
+  <div class = "show_text">
+    <b>Date:</b>
+    <%= @report.report_date %>
+  </div>
 
   <div class = "show_text">
     <b>Title:</b>
@@ -13,5 +16,9 @@
     <%= @report.body_text %>
   </div>
 
+  <div class = "show_text">
+    <b>公開状態</b>
+    <%= @report.public_flag? ? "O" : "X"%>
+  </div>
 <%= link_to 'Edit', edit_report_path(@report) %>
 <%= render 'report_list_button' %>

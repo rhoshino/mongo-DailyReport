@@ -2,11 +2,14 @@ class User
   include Mongoid::Document
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
+
+
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :email, :password, :password_confirmation, :remember_me
+  attr_accessible :email, :password, :password_confirmation,
+                  :remember_me, :name, :role, :send_address
 
   ## Database authenticatable
   field :email,              type: String, default: ""
@@ -40,8 +43,15 @@ class User
   ## User's Field
   field :name, type: String
   field :send_address , type: String
+  field :role, type: String
 
   ## Reration
-  #embeds_many :reports
+  has_many :reports
+
+  ## Methods
+  def admin?
+    role == "ADMIN" #これ定数で呼び出ししたかったなあ
+  end
+
 
 end

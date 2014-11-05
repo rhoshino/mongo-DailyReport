@@ -15,6 +15,14 @@
 
 
   <!-- 日報の入力フィールド -->
+  <div class="date_field">
+    <%= f.label "報告日付" %><br />
+    <%= f.date_select(
+        :report_date,
+        use_month_numbers: true,
+        start_year: 2014,
+        default: Date.today() )%>
+  </div>
 
   <div class="input_text_field">
     <%= f.label "題名" %><br />
@@ -23,6 +31,11 @@
   <div class="input_text_field">
     <%= f.label "本文" %><br />
     <%= f.text_area :body_text %>
+  </div>
+
+  <div class="field">
+    <%= f.label "公開フラグ" %><br />
+    <%= f.check_box :public_flag, {}, true, false %>
   </div>
 
   <div class="actions">

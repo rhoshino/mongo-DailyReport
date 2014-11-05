@@ -17,28 +17,27 @@
       <th>閲覧</th>
       <th>編集</th>
       <th>削除</th>
-      <th>あなた？</th>
+      <th>あなたの日報か？</th>
     </tr>
 
     <% @reports.each do |report| %>
       <tr>
-        <td><%#= report.public_flag? ? "O" : "X"%></td>
+        <td><%= report.public_flag? ? "O" : "X"%></td>
         <td><%= report.id%></td>
-        <td><%#= report.report_date%></td>
+        <td><%= report.report_date%></td>
         <td><%= report.title %></td>
         <td><%= report.body_text.slice(0,10) %></td>
-        <td><%#= report.user_id %></td>
-        <td><%#= User.find(report.user_id).name %></td>
-        <td><%#= report.user.name %></td>
+        <td><%= report.user_id %></td>
+        <td><%= report.user.name %></td>
 
         <td><%= button_to 'Show', report_path(report),method: :get %></td>
         <td><%= button_to 'Edit', edit_report_path(report),method: :get %></td>
         <td><%= button_to 'Destroy', report, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-        <td><%#if current_user.id == report.user_id %>
-              <%#= "O"%>
-            <%#else%>
-               <%#= "X"%>
-            <%#end%>
+        <td><%if current_user.id == report.user_id %>
+              <%= "O"%>
+            <%else%>
+               <%= "X"%>
+            <%end%>
         </td>
       </tr>
     <% end %>
