@@ -13,7 +13,7 @@ class ReportsController < ApplicationController
 
  def new
     @report = Report.new()
-    @report.worktimes.build
+    #@report.worktimes.build
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @report }
@@ -35,5 +35,30 @@ class ReportsController < ApplicationController
         format.json { render json: @report.errors, status: :unprocessable_entity }
       end
     end
+  end
+
+  def show
+    @report = Report.find(params[:id])
+
+    respond_to do |format|
+      format.html # show.html.erb
+      format.json { render json: @report }
+    end
+  end
+
+  def destroy
+    @report = Report.find(params[:id])
+    @report.destroy
+
+    respond_to do |format|
+      format.html { redirect_to reports_path }
+      format.json { head :no_content }
+    end
+  end
+
+
+  # GET /reports/1/edit
+  def edit
+    @report = Report.find(params[:id])
   end
 end

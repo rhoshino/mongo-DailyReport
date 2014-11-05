@@ -1,0 +1,17 @@
+#coding:utf-8
+<p id="notice"><%= notice %></p>
+
+
+  <div class = "show_text">
+    <b>Title:</b>
+    <%= @report.title %>
+  </div>
+
+
+  <div class = "show_text">
+    <b>Bodytext:</b>
+    <%= @report.body_text %>
+  </div>
+
+<%= link_to 'Edit', edit_report_path(@report) %>
+<%= render 'report_list_button' %>

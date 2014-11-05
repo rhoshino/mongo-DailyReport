@@ -1,0 +1,48 @@
+#coding:utf-8
+
+<%#= stylesheet_link_tag "list_page", :media => "all" %>
+
+
+<% unless @reports.length == 0%>
+  <table class = "test1">
+
+    <tr>
+      <th>公開</th>
+      <th>日報ID</th>
+      <th>報告日付</th>
+      <th>タイトル</th>
+      <th>本文(最初の10文字)</th>
+      <th>著者ID</th>
+      <th>著者名</th>
+      <th>閲覧</th>
+      <th>編集</th>
+      <th>削除</th>
+      <th>あなた？</th>
+    </tr>
+
+    <% @reports.each do |report| %>
+      <tr>
+        <td><%#= report.public_flag? ? "O" : "X"%></td>
+        <td><%= report.id%></td>
+        <td><%#= report.report_date%></td>
+        <td><%= report.title %></td>
+        <td><%= report.body_text.slice(0,10) %></td>
+        <td><%#= report.user_id %></td>
+        <td><%#= User.find(report.user_id).name %></td>
+        <td><%#= report.user.name %></td>
+
+        <td><%= button_to 'Show', report_path(report),method: :get %></td>
+        <td><%= button_to 'Edit', edit_report_path(report),method: :get %></td>
+        <td><%= button_to 'Destroy', report, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%#if current_user.id == report.user_id %>
+              <%#= "O"%>
+            <%#else%>
+               <%#= "X"%>
+            <%#end%>
+        </td>
+      </tr>
+    <% end %>
+  </table>
+<% else %>
+  <h2> まだ日報がありません </h2>
+<% end%>

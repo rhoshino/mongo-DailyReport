@@ -1,0 +1,32 @@
+#coding:utf-8
+
+<%= form_for(@report) do |f| %>
+  <% if @report.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@report.errors.count, "error") %> prohibited this report from being saved:</h2>
+
+      <ul>
+      <% @report.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+
+  <!-- 日報の入力フィールド -->
+
+  <div class="input_text_field">
+    <%= f.label "題名" %><br />
+    <%= f.text_field :title %>
+  </div>
+  <div class="input_text_field">
+    <%= f.label "本文" %><br />
+    <%= f.text_area :body_text %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit(['save report',]) %>
+  </div>
+
+<% end %>
