@@ -1,6 +1,8 @@
 MongoReport::Application.routes.draw do
 
 
+  devise_for :users
+
   resources :reports
   root :to => "reports#index"
   # The priority is based upon order of creation:
